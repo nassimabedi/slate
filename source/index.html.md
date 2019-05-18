@@ -19,7 +19,7 @@ search: true
 
 Welcome to the Manam API! You can use our API to access Manam API endpoints, which is a IDaaS and can register, login, conform, recover, Google Login oauth2.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in Shell (for shell use httpie (https://httpie.org/) ), and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 
 # Manam
@@ -30,8 +30,30 @@ Manam is IDaaS (Identity as a service).
 
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+http -p BHbh OPTIONS https://manam.ir/auth/register 
+
+OPTIONS /auth/register HTTP/1.1
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 0
+Host: localhost:3000
+User-Agent: HTTPie/0.9.9
+
+HTTP/1.1 200 OK
+Content-Length: 0
+Date: Tue, 09 Oct 2018 20:13:59 GMT
+Set-Cookie: csrf_token=MWZ1fmXXT1VTylskfLD9CTu4sSF1rPIu1WN+hCIrokI=; Max-Age=31536000
+Vary: Cookie
+X-Csrf-Token: ThVXxAWl2CXRhVHzOz1cd/AnikmAaoS2vfUlA+ZeIdR/cyK6YHKXcIJPCtdHjaF+y587aPXGdpholluHxHWDlg== 
+
+
+
+http -p BHbh --json POST :3000/auth/register name="myname" email="myemail@mail.com" password="password" confirm_password="password" customer_token="cus_token" \
+Cookie:"csrf_token=MWZ1fmXXT1VTylskfLD9CTu4sSF1rPIu1WN+hCIrokI=" \
+"X-Csrf-Token":"ThVXxAWl2CXRhVHzOz1cd/AnikmAaoS2vfUlA+ZeIdR/cyK6YHKXcIJPCtdHjaF+y587aPXGdpholluHxHWDlg=="
+
+
 ```
 
 ```javascript
@@ -81,8 +103,7 @@ customer_token | string
 ## Confirm
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
+http -p BHbh --json GET https://manam.ir/auth/confirm cnf="h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==" customer_token="cus_token"
 ```
 
 ```javascript
@@ -125,9 +146,30 @@ customer_token | The token that specific for each customer
 
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
+http -p BHbh OPTIONS https://manam.ir/auth/login 
+
+OPTIONS /auth/login HTTP/1.1
+Accept: */*
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Length: 0
+Host: localhost:3000
+User-Agent: HTTPie/0.9.9
+
+HTTP/1.1 200 OK
+Content-Length: 0
+Date: Tue, 09 Oct 2018 20:30:11 GMT
+Set-Cookie: csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=; Max-Age=31536000
+Vary: Cookie
+X-Csrf-Token: 5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA==
+
+
+http -p BHbh POST https://manam.ir/auth/login email="myemail@mail.com" password="password" cusromer_token="cus_token"\
+ Cookie:"csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=" \
+"X-Csrf-Token":"5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA=="
+
+
+
 ```
 
 ```javascript
@@ -175,9 +217,9 @@ customer_token | The token is specific for customer
 ## Recover
 
 ```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
+http -p BHbh POST https://manam.ir/auth/recover email="myemail@mail.com"  cusromer_token="cus_token"\
+ Cookie:"csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=" \
+"X-Csrf-Token":"5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA=="
 ```
 
 ```javascript
