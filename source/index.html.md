@@ -24,6 +24,8 @@ We have language bindings in Shell, Ruby, Python, and JavaScript! You can view c
 
 # Manam
 
+Manam is IDaaS (Identity as a service).
+
 ## Register
 
 
@@ -219,7 +221,7 @@ customer_token | The token is specific for customer
 
 
 ## Google Login (oauth2)
-use this link `<a href="/googlelogin/[customer-token]">Google Log In</a>`
+Use this link `<a href="https://manam.ir/googlelogin/[customer-token]">Google Log In</a>`
 
 Contact to admin for give customer-token
 
