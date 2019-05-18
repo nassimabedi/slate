@@ -263,49 +263,48 @@ curl "http://example.com/api/kittens"
 ```
 
 ```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
+$.ajax({
+    url: "/auth/register",
+    dataType: "json",
+    type : "POST",
+    data: {name:"myname", email:"myemail@mail.com", password:"password", confirm_password:"password", "customer_token":"cus_token"}
+    success : function(r) {
+      console.log(r);
+    }
+  });
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+"location": "/",
+"message": "Please verify your account, an e-mail has been sent to you.",
+"status": "success"
+}
 ```
 
 This endpoint register user in Manam.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`POST https://manam.ir/auth/register`
 
 ### Query Parameters
+None.
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+### Data Params
+
+Parameter | Type 
+--------- | ------- 
+name | string
+email | [string] 
+password | [string]
+confirm_password | string
+customer_token | string
+
+
 
 ## Confirm
 
@@ -329,21 +328,23 @@ curl "http://example.com/api/kittens/2"
 ```
 
 ```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
+$.ajax({
+    url: "/auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==&customer_token=cus_token",
+    dataType: "json",
+    type : "GET",
+    success : function(r) {
+      console.log(r);
+    }
+  });
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+"location": "/",
+"message": "You have successfully confirmed your account.",
+"status": "success"
 }
 ```
 
@@ -353,13 +354,14 @@ This endpoint confirm users on Manam.
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET https://manam.ir/auth/confirm/<cnf>/<customer_token>`
 
 ### URL Parameters
 
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to retrieve
+cnf | The string that confirm registartion
+customer_token | The token that specific for each customer
 
 ## Login
 
