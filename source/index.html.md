@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: Manam API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
@@ -17,11 +17,11 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the Manam API! You can use our API to access Manam API endpoints, which is a IDaaS and can register, login, conform, recover, Google Login oauth2.
 
 We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+
 
 # Authentication
 
@@ -321,9 +321,7 @@ This endpoint login user on Manam.
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+None.
 
 
 ### Data Parameters
@@ -338,20 +336,6 @@ customer_token | The token is specific for customer
 
 ## Recover
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
 ```shell
 curl "http://example.com/api/kittens/2"
   -X DELETE
@@ -359,18 +343,24 @@ curl "http://example.com/api/kittens/2"
 ```
 
 ```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
+$.ajax({
+    url: "/auth/recover",
+    dataType: "json",
+    type : "POST",
+    data: { email:"myemail@mail.com", "customer_token":"cus_token"}
+    success : function(r) {
+      console.log(r);
+    }
+  });
+  ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+"location": "/",
+"message": "An email has been sent to you with further instructions on how to reset your password.",
+"status": "success"
 }
 ```
 
@@ -378,14 +368,23 @@ This endpoint recover user on Manam.
 
 ### HTTP Request
 
-`DELETE http://example.com/kittens/<ID>`
+`POST https://manam.ir/auth/recover`
 
 ### URL Parameters
 
+None.
+
+### Data Parameters
+
 Parameter | Description
 --------- | -----------
-ID | The ID of the kitten to delete
+email | The email that register 
+customer_token | The token is specific for customer
 
 
+## Google Login (oauth2)
+use this link `<a href="/googlelogin/[customer-token]">Google Log In</a>`
+
+Contact to admin for give customer-token
 
 
