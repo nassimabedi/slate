@@ -47,8 +47,11 @@ Set-Cookie: csrf_token=MWZ1fmXXT1VTylskfLD9CTu4sSF1rPIu1WN+hCIrokI=; Max-Age=315
 Vary: Cookie
 X-Csrf-Token: ThVXxAWl2CXRhVHzOz1cd/AnikmAaoS2vfUlA+ZeIdR/cyK6YHKXcIJPCtdHjaF+y587aPXGdpholluHxHWDlg== 
 
+```
 
+> Use above command to get cookie and X-Csrf-token
 
+```shell
 http -p BHbh --json POST :3000/auth/register name="myname" email="myemail@mail.com" password="password" confirm_password="password" customer_token="cus_token" \
 Cookie:"csrf_token=MWZ1fmXXT1VTylskfLD9CTu4sSF1rPIu1WN+hCIrokI=" \
 "X-Csrf-Token":"ThVXxAWl2CXRhVHzOz1cd/AnikmAaoS2vfUlA+ZeIdR/cyK6YHKXcIJPCtdHjaF+y587aPXGdpholluHxHWDlg=="
@@ -162,7 +165,11 @@ Date: Tue, 09 Oct 2018 20:30:11 GMT
 Set-Cookie: csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=; Max-Age=31536000
 Vary: Cookie
 X-Csrf-Token: 5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA==
+```
 
+> Use above command to get cookie and X-Csrf-token
+
+```shell
 
 http -p BHbh POST https://manam.ir/auth/login email="myemail@mail.com" password="password" cusromer_token="cus_token"\
  Cookie:"csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=" \
