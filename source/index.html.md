@@ -52,16 +52,14 @@ X-Csrf-Token: ThVXxAWl2CXRhVHzOz1cd/AnikmAaoS2vfUlA+ZeIdR/cyK6YHKXcIJPCtdHjaF+y5
 > Use above command to get cookie and X-Csrf-token
 
 ```shell
-http -p BHbh --json POST :3000/auth/register name="myname" email="myemail@mail.com" password="password" confirm_password="password" customer_token="cus_token" \
-Cookie:"csrf_token=MWZ1fmXXT1VTylskfLD9CTu4sSF1rPIu1WN+hCIrokI=" \
-"X-Csrf-Token":"ThVXxAWl2CXRhVHzOz1cd/AnikmAaoS2vfUlA+ZeIdR/cyK6YHKXcIJPCtdHjaF+y587aPXGdpholluHxHWDlg=="
 
+curl -X POST -H "Content-Type: application/json" -H "customer_token:cus-token" -H "Cookie:csrf_token=MWZ1fmXXT1VTylskfLD9CTu4sSF1rPIu1WN+hCIrokI=" -H "X-Csrf-Token:ThVXxAWl2CXRhVHzOz1cd/AnikmAaoS2vfUlA+ZeIdR/cyK6YHKXcIJPCtdHjaF+y587aPXGdpholluHxHWDlg==" https://api.manam.ir/auth/register -d '{"name": "myyname","email": "myemail@mail.com","password":"password","confirm_password":"password"}'
 
 ```
 
 ```javascript
 $.ajax({
-    url: "/auth/register",
+    url: "https://api.manam.ir/auth/register",
     dataType: "json",
     type : "POST",
     data: {name:"myname", email:"myemail@mail.com", password:"password", confirm_password:"password", "customer_token":"cus_token"}
@@ -75,9 +73,11 @@ $.ajax({
 
 ```json
 {
-"location": "/",
-"message": "Please verify your account, an e-mail has been sent to you.",
-"status": "success"
+    "username": "",
+    "fullname": "",
+    "email": "",
+    "roles": [],
+    "permissions": []
 }
 ```
 
@@ -106,12 +106,12 @@ customer_token | string
 ## Confirm
 
 ```shell
-http -p BHbh --json GET https://manam.ir/auth/confirm cnf="h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==" customer_token="cus_token"
+http -p BHbh --json GET https://api.manam.ir/auth/confirm cnf="h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==" customer_token="cus_token"
 ```
 
 ```javascript
 $.ajax({
-    url: "/auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==&customer_token=cus_token",
+    url: "https://api.manam.ir//auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==&customer_token=cus_token",
     dataType: "json",
     type : "GET",
     success : function(r) {
