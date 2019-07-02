@@ -105,7 +105,7 @@ name | string
 email | [string] 
 password | [string]
 confirm_password | string
-customer_token | string
+
 
 
 
@@ -292,6 +292,29 @@ Parameter | Description
 --------- | -----------
 email | The email that register 
 customer_token | The token is specific for customer
+
+
+## Refresh Token
+
+
+```shell
+
+curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" -H "auth_token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiVlx1MDAxNcKbwoNUwoonbFPCu8KhwrYiLCJpYXQiOjE0NDQyNjI4NjYsImV4cCI6MTQ0NDI2Mjg4Nn0.Dww7TC-d0teDAgsmKHw7bhF2THNichsE6rVJq9xu_2s" -H "refresh_token:fdb8fdbecf1d03ce5e6125c067733c0d51de209c" https://api.manam.ir/auth/refreshToken 
+
+
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiVlx1MDAxNcKbwoNUwoonbFPCu8KhwrYiLCJpYXQiOjE0NDQyNjI4NjYsImV4cCI6MTQ0NDI2Mjg4Nn0.Dww7TC-d0teDAgsmKHw7bhF2THNichsE6rVJq9xu_2s",
+    "expires_in":20,
+    "refresh_token":"7fd15938c823cf58e78019bea2af142f9449696a"
+}
+```
+
+This endpoint RefreshToken create new refresh token for users.
 
 
 ## Google Login (oauth2)
