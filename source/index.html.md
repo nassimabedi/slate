@@ -60,6 +60,12 @@ curl -X POST -H "Content-Type: application/json" -H "customer_token:cus-token" -
 ```javascript
 $.ajax({
     url: "https://api.manam.ir/auth/register",
+    headers: {
+                'customer_token': 'cus_token',
+         
+                'Cookie': 'csrf_token=MWZ1fmXXT1VTylskfLD9CTu4sSF1rPIu1WN+hCIrokI=',
+                'X-Csrf-Token':'ThVXxAWl2CXRhVHzOz1cd/AnikmAaoS2vfUlA+ZeIdR/cyK6YHKXcIJPCtdHjaF+y587aPXGdpholluHxHWDlg=='
+            },
     dataType: "json",
     type : "POST",
     data: {name:"myname", email:"myemail@mail.com", password:"password", confirm_password:"password", "customer_token":"cus_token"}
@@ -112,7 +118,10 @@ curl -X GET -H "Content-Type: application/json" -H "customer_token:cus-token" ht
 
 ```javascript
 $.ajax({
-    url: "https://api.manam.ir/auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==&customer_token=cus_token",
+    url: "https://api.manam.ir/auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==,
+    headers: {
+                'customer_token': 'cus_token',
+            },
     dataType: "json",
     type : "GET",
     success : function(r) {
@@ -179,9 +188,14 @@ curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" -
 ```javascript
  $.ajax({
     url: "https://api.manam.ir/auth/login",
+    headers: {
+                'customer_token': 'cus_token',
+                'Cookie': 'csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=',
+                'X-Csrf-Token':'5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA=='
+            },
     dataType: "json",
     type : "POST",
-    data: { email:"myemail@mail.com", password:"password", "customer_token":"cus_token"}
+    data: { email:"myemail@mail.com", password:"password"}
     success : function(r) {
       console.log(r);
     }
@@ -228,17 +242,24 @@ customer_token | The token is specific for customer
 ## Recover
 
 ```shell
-http -p BHbh POST https://manam.ir/auth/recover email="myemail@mail.com"  cusromer_token="cus_token"\
- Cookie:"csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=" \
-"X-Csrf-Token":"5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA=="
+
+curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" -H "Cookie:csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=" -H "X-Csrf-Token:5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA==" https://api.manam.ir/auth/recover -d '{"email": "myemail@mail.com"}'
+
+
 ```
 
 ```javascript
 $.ajax({
-    url: "/auth/recover",
+    url: "https://api.manam.ir/auth/recover",
+    headers: {
+                'customer_token': 'cus_token',
+                'auth_token':"..."
+                'Cookie': 'csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=',
+                'X-Csrf-Token':'5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA=='
+            },
     dataType: "json",
     type : "POST",
-    data: { email:"myemail@mail.com", "customer_token":"cus_token"}
+    data: { email:"myemail@mail.com"}
     success : function(r) {
       console.log(r);
     }
@@ -259,7 +280,7 @@ This endpoint recover user on Manam.
 
 ### HTTP Request
 
-`POST https://manam.ir/auth/recover`
+`POST https://api.manam.ir/auth/recover`
 
 ### URL Parameters
 
