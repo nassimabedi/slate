@@ -318,7 +318,7 @@ This endpoint RefreshToken create new refresh token for users.
 
 
 ## Google Login (oauth2)
-Use this link `<a href="https://manam.ir/googlelogin/[customer-token]">Google Log In</a>`
+Use this link `<a href="https://api.manam.ir/googlelogin/[customer-token]">Google Log In</a>`
 
 Contact to admin for give customer-token
 
