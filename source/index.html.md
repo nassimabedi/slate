@@ -85,7 +85,7 @@ This endpoint register user in Manam.
 
 ### HTTP Request
 
-`POST https://manam.ir/auth/register`
+`POST https://api.manam.ir/auth/register`
 
 ### Query Parameters
 None.
@@ -106,12 +106,13 @@ customer_token | string
 ## Confirm
 
 ```shell
-http -p BHbh --json GET https://api.manam.ir/auth/confirm cnf="h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==" customer_token="cus_token"
+
+curl -X GET -H "Content-Type: application/json" -H "customer_token:cus-token" https://api.manam.ir/auth/confirm -d {cnf:h-A1iPysWfQ9Mj5EYuCKZo9KJ5UccHTjqABqfL-8bw48fkUQAOhBB-Bbwo2V7AE5TKYYYE9QXpDLrCvImQ57Tw==}
 ```
 
 ```javascript
 $.ajax({
-    url: "https://api.manam.ir//auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==&customer_token=cus_token",
+    url: "https://api.manam.ir/auth/confirm?cnf=FFL5QDOYTXJZcO3SdcDgd8Kv-_euyLqVwm-eFagHZG_KCBLgtyhUkjFAeeDXvMFVVame3vXKyiWbnpNAVxQI8A==&customer_token=cus_token",
     dataType: "json",
     type : "GET",
     success : function(r) {
@@ -136,7 +137,7 @@ This endpoint confirm users on Manam.
 
 ### HTTP Request
 
-`GET https://manam.ir/auth/confirm/<cnf>/<customer_token>`
+`GET https://api.manam.ir/auth/confirm/<cnf>/<customer_token>`
 
 ### URL Parameters
 
@@ -149,7 +150,7 @@ customer_token | The token that specific for each customer
 
 
 ```shell
-http -p BHbh OPTIONS https://manam.ir/auth/login 
+http -p BHbh OPTIONS https://api.manam.ir/auth/login 
 
 OPTIONS /auth/login HTTP/1.1
 Accept: */*
@@ -171,17 +172,13 @@ X-Csrf-Token: 5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbG
 
 ```shell
 
-http -p BHbh POST https://manam.ir/auth/login email="myemail@mail.com" password="password" cusromer_token="cus_token"\
- Cookie:"csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=" \
-"X-Csrf-Token":"5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA=="
-
-
+curl -X POST -H "Content-Type: application/json" -H "customer_token:cus_token" -H "Cookie:csrf_token=rZyuxltLf9nRaMs/b2bzHqmkhqeCfYobMSD7IOZ0JRg=" -H "X-Csrf-Token:5FD7JCX0fxTV3s2tzpxub8XHdlpJIuVS1i2jpoiW6mxJzFXifr8AzQS2BpKh+p1xbGPw/ctfb0nnDViGbuLPdA==" https://api.manam.ir/auth/login -d '{"email": "myemail@mail.com","password":"password"}'
 
 ```
 
 ```javascript
  $.ajax({
-    url: "/auth/login",
+    url: "https://api.manam.ir/auth/login",
     dataType: "json",
     type : "POST",
     data: { email:"myemail@mail.com", password:"password", "customer_token":"cus_token"}
@@ -195,16 +192,23 @@ http -p BHbh POST https://manam.ir/auth/login email="myemail@mail.com" password=
 
 ```json
 {
-"location": "/",
-"status": "success"
+    "auth_token": "...",
+    "refresh_token": "...",
+    "username": "",
+    "fullname": "",
+    "email": "",
+    "roles": [],
+    "permissions": []
 }
+
+
 ```
 
 This endpoint login user on Manam.
 
 ### HTTP Request
 
-`POST https://manam.ir/auth/login`
+`POST https://api.manam.ir/auth/login`
 
 ### URL Parameters
 
